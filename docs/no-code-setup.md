@@ -40,13 +40,15 @@ Import the provided CSV templates from the `templates/` folder to provision thes
 ### 1. New Joiner Assistant
 
 * **Power Virtual Agents chatbot** with topics:
-  * **FAQs** &ndash; Reads from SharePoint FAQ list.
-  * **Onboarding Checklist** &ndash; Shows tasks from SharePoint.
-  * **Quiz** &ndash; Fetches a row from Excel and uses Adaptive Cards to ask questions.
-* **Gamification**:
-  * Power Automate flow triggers when a task or quiz is completed and awards points in SharePoint.
-* **Leaderboard**:
-  * Power BI reads the Points column from SharePoint and publishes a leaderboard chart in a Teams tab.
+  * **AI FAQ Bot** &ndash; Answers common new-joiner questions using SharePoint FAQ list (or Azure OpenAI).
+  * **Document Navigator** &ndash; Serves links to onboarding docs, policies, org charts (from SharePoint).
+  * **Onboarding Checklist & Progress Tracker** &ndash; Shows tasks from SharePoint; tracks completed vs pending.
+  * **Interactive Quiz** &ndash; Fetches quiz Q&A from Excel and delivers via Adaptive Cards.
+* **Gamification & Leaderboard**:
+  * Power Automate flow awards points/badges when tasks or quizzes are completed (tasks list / quiz Excel).
+  * Leaderboard visualization via Power BI or Adaptive Card in Teams shows top participants.
+* **Onboarding Progress Dashboard**:
+  * Power BI or Adaptive Cards display overall onboarding progress, completed modules, and leaderboard.
 
 ### 2. Inventory Forecast Assistant
 
@@ -97,19 +99,11 @@ Below are the two key Power Automate flows to wire up gamification and low-stock
 
 These flows can be built drag-and-drop in Power Automate, using built-in connectors for SharePoint, Excel, and Teams.
 
-For detailed, step-by-step UI guidance, see:
+For detailed, step-by-step UI guidance and flow blueprints, see:
 
-- [Award Points Flow Implementation Details](flows/award-points-flow-details.md)
+- [New Joiner Assistant Flow Blueprint](flows/joiner-assistant-flow-details.md)
 - [Low-Stock Alert Flow Implementation Details](flows/low-stock-alert-flow-details.md)
 
-### Adaptive Card JSON Templates
-
-Use these Adaptive Cards in Power Automate's **Post adaptive card** actions. The JSON lives under `templates/`:
-
-- [Quiz Adaptive Card JSON](../templates/quiz-adaptive-card.json)
-- [Low-Stock Alert Adaptive Card JSON](../templates/low-stock-adaptive-card.json)
-
-For detailed description and usage examples, see the [Adaptive Card JSON Templates guide](flows/adaptive-card-templates.md).
 
 ## Why This Is No-Code Friendly
 
