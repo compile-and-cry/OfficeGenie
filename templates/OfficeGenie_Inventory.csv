@@ -1,0 +1,4 @@
+ItemName,Category,StockLevel,ReorderThreshold,UsagePerWeek,PredictedRunOutDate
+"Printer Paper (A4)",Stationery,500,200,100,=TODAY()+(E2/D2)
+"Coffee Beans",Pantry,5,2,1,=TODAY()+(E3/D3)
+"Whiteboard Markers",Stationery,20,10,2,=TODAY()+(E4/D4)

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "📚 Company Onboarding Quiz",
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Question: What is our official work timing policy?",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "quizAnswer",
+      "style": "expanded",
+      "choices": [
+        { "title": "9–5", "value": "OptionA" },
+        { "title": "Flexible 10–4 core hours", "value": "OptionB" },
+        { "title": "Shift-based", "value": "OptionC" }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit Answer",
+      "data": { "quizId": "quiz-001", "action": "submit_quiz" }
+    }
+  ]
+}

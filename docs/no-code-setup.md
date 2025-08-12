@@ -26,6 +26,15 @@ This guide walks through how to strip **OfficeGenie** down to a no-code / low-co
 4. **Inventory Usage Log (Excel in OneDrive)**
    * Columns: Item Name, Stock Level, Reorder Threshold, Last Updated, Quantity Used Per Week.
 
+## Ready-to-Use Templates
+
+Import the provided CSV templates from the `templates/` folder to provision these lists and files directly:
+
+- **OfficeGenie_FAQ.csv** – FAQ SharePoint list template
+- **OfficeGenie_Tasks.csv** – Onboarding Tasks SharePoint list template
+- **OfficeGenie_Quizzes.csv** – Quizzes Excel template
+- **OfficeGenie_Inventory.csv** – Inventory Usage Excel template
+
 ## How It Works (Step-by-Step)
 
 ### 1. New Joiner Assistant
@@ -92,6 +101,15 @@ For detailed, step-by-step UI guidance, see:
 
 - [Award Points Flow Implementation Details](flows/award-points-flow-details.md)
 - [Low-Stock Alert Flow Implementation Details](flows/low-stock-alert-flow-details.md)
+
+### Adaptive Card JSON Templates
+
+Use these Adaptive Cards in Power Automate's **Post adaptive card** actions. The JSON lives under `templates/`:
+
+- [Quiz Adaptive Card JSON](../templates/quiz-adaptive-card.json)
+- [Low-Stock Alert Adaptive Card JSON](../templates/low-stock-adaptive-card.json)
+
+For detailed description and usage examples, see the [Adaptive Card JSON Templates guide](flows/adaptive-card-templates.md).
 
 ## Why This Is No-Code Friendly
 

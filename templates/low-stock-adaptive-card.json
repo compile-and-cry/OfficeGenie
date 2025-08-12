@@ -1,0 +1,22 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "⚠️ Low Stock Alert",
+      "weight": "Bolder",
+      "color": "Attention",
+      "size": "Medium"
+    },
+    { "type": "TextBlock", "text": "**Item:** Printer Paper (A4)", "wrap": true },
+    { "type": "TextBlock", "text": "**Current Stock:** 150 sheets", "wrap": true },
+    { "type": "TextBlock", "text": "**Reorder Threshold:** 200 sheets", "wrap": true },
+    { "type": "TextBlock", "text": "**Suggested Reorder Qty:** 500 sheets", "wrap": true }
+  ],
+  "actions": [
+    { "type": "Action.Submit", "title": "Notify via Email", "data": { "action": "notify_email", "itemId": "item-001" } },
+    { "type": "Action.Submit", "title": "Notify in Teams", "data": { "action": "notify_teams", "itemId": "item-001" } }
+  ]
+}
