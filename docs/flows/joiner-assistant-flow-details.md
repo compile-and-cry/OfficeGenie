@@ -68,19 +68,73 @@ This flow awards points (and optional badges) when a user completes a task or an
    - At the end of the flow, use **Respond to Power Virtual Agents** action to send success/failure status back to the bot.
 
 ### 2. Progress Update Notification
-1. **Trigger**: scheduled flow (Daily or weekly).
-2. **Action**: query Onboarding Tasks list and count completed vs pending.
-3. **Post**: send an Adaptive Card summary to the user or HR channel with progress stats.
+#### 2. Progress Update Notification Flow
+
+This scheduled flow sends users or HR a summary of onboarding progress.
+
+1. **Create the flow**
+   - In Power Automate, click **Create** → **Scheduled cloud flow**.
+   - Name it **Onboarding Progress Notification** and set the schedule (e.g. daily at 8:00 AM).
+
+2. **Retrieve tasks**
+   - Add **List items** (SharePoint) for the Onboarding Tasks list.
+
+3. **Filter and count**
+   - Add **Filter array** to separate completed tasks:
+     - From: **value** (output of List items)
+     - Condition: `item()?['Status']` is equal to `Done`
+   - Add **Compose** actions to compute:
+     - `completedCount`: `length(body('Filter_array'))`
+     - `totalCount`: `length(body('List_items')?['value'])`
+
+4. **Compose Adaptive Card**
+   - Add **Compose** with Adaptive Card JSON template (or use **Compose** inline):
+     ```jsonc
+     {
+       "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+       "type": "AdaptiveCard",
+       "version": "1.4",
+       "body": [
+         { "type": "TextBlock", "text": "📊 Onboarding Progress", "weight": "Bolder" },
+         { "type": "TextBlock", "text": "Completed: @{outputs('completedCount')} of @{outputs('totalCount')} tasks", "wrap": true }
+       ]
+     }
+     ```
+
+5. **Post Adaptive Card**
+   - Add **Post adaptive card in a chat or channel** (Microsoft Teams).
+   - Configure Team/Channel or individual chat.
+   - Use **Outputs** of the previous Compose as the **Message**.
+
 
 ### 3. Leaderboard Dashboard Refresh
-1. **Trigger**: after points update or scheduled (e.g., hourly).
-2. **Action**: refresh Power BI dataset or rebuild Adaptive Card leaderboard.
+#### 3. Leaderboard Dashboard Refresh Flow
+
+This flow refreshes your leaderboard display in Power BI or Adaptive Cards.
+
+1. **Create the flow**
+   - In Power Automate, click **Create** → **Scheduled cloud flow** (or **Automated cloud flow** triggered by a SharePoint update).
+   - Name it **Leaderboard Refresh Flow**.
+
+2. **Define trigger**
+   - Scheduled: set to run hourly or daily.
+   - Or, Automated: use **When an item or file is modified** on the Points list.
+
+3. **Refresh Power BI dataset**
+   - Add **Refresh a dataset** (Power BI) action.
+   - Select your Workspace and Dataset for the leaderboard report.
+
+4. **(Optional) Update Adaptive Card leaderboard**
+   - Use **Compose** to build a dynamic Adaptive Card JSON (similar to Progress Card).
+   - Add **Post adaptive card** to Teams to replace or update the leaderboard card.
+
 
 ## C. End-to-End Sequence
 1. User chats with PVA: asks a question → FAQ Bot replies.
 2. User requests document links → Document Navigator posts resource cards.
 3. User starts quiz → PVA posts Adaptive Card → user submits answer → Flow awards points.
 4. User marks task done → Flow awards task points and updates progress.
-5. Scheduled flow posts progress summary and updated leaderboard.
+5. Scheduled flow posts progress summary via Adaptive Card.
+6. Leaderboard Refresh Flow updates the Power BI dataset (and/or Adaptive Card) to show the latest standings.
 
 This blueprint covers all PRD features for the New Joiner Assistant.
