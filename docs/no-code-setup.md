@@ -105,9 +105,3 @@ For detailed, step-by-step UI guidance and flow blueprints, see:
 - [Low-Stock Alert Flow Implementation Details](flows/low-stock-alert-flow-details.md)
 
 
-## Why This Is No-Code Friendly
-
-* No custom code &ndash; Uses out-of-the-box Microsoft 365 tools.
-* Editable data &ndash; HR/Ops can update Excel/SharePoint without touching chatbot logic.
-* Drag-and-drop flows &ndash; Build workflows visually in Power Automate.
-* Visual dashboards &ndash; Create reports in Power BI and embed directly in Teams.
